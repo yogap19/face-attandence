@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "user-select",
+          "-ms-filter"
+        ]
+      }
+    ],
+    "css-prefix-order": "off"
+  }
+}
