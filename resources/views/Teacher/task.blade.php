@@ -272,5 +272,4 @@
     </div>
     <!-- Content wrapper -->
 
-    <!-- Content wrapper -->
 @endsection

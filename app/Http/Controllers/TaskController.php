@@ -33,10 +33,13 @@ class TaskController extends Controller
     function add_task(Request $request)
     {
         $validated = $request->validate([
-            'taskName'       => 'required|unique:tasks',
+            'taskName'       => 'required',
             'subject'        => 'required',
             'deadline'       => 'required',
+            'description'    => ''
         ]);
+        $subject = Subject::where('name', $request->subject)->first();
+        $validated['codeTask'] = $subject->codeSubject;
         $validated['teacher'] = Auth::user()->username;
         $task = Task::create($validated);
         Session::flash('status', 'success');
@@ -53,7 +56,7 @@ class TaskController extends Controller
     {
         $title = Subject::subjectName($slug);
         $data = [
-            'task'    => Task::where('subject', $title)->get(),
+            'task'    => Task::where('subject', $title)->orderBy('created_at', 'desc')->get(),
             'title'   => $title,
         ];
         // dd($data);

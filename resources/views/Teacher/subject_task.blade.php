@@ -221,9 +221,9 @@
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-user"></i></span>
+                                            class="bx bx-task"></i></span>
                                     <input type="text" class="form-control" id="basic-icon-default-fullname"
-                                        placeholder="John Doe" aria-label="John Doe"
+                                        placeholder="Task name" aria-label="John Doe"
                                         aria-describedby="basic-icon-default-fullname2" name="taskName" />
                                 </div>
                             </div>
@@ -234,9 +234,8 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-phone2" class="input-group-text"><i
                                             class="bx bx-time"></i></span>
-                                    <input type="datetime-local" id="basic-icon-default-phone"
-                                        class="form-control phone-mask" aria-describedby="basic-icon-default-phone2"
-                                        name="deadline" />
+                                    <input type="datetime-local" id="deadline" class="form-control phone-mask"
+                                        aria-describedby="basic-icon-default-phone2" name="deadline" min="" />
                                 </div>
                             </div>
                         </div>
@@ -257,11 +256,30 @@
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!-- Content wrapper -->
+
+    <script>
+        // Function to get current date and time in the required format for datetime-local input
+        function getCurrentDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            // Combine date and time in the format "YYYY-MM-DDTHH:MM"
+            const datetime = `${year}-${month}-${day}T${hours}:${minutes}`;
+            return datetime;
+        }
+
+        // Set the min attribute for the datetime-local input
+        document.getElementById('deadline').min = getCurrentDateTime();
+    </script>
 @endsection
